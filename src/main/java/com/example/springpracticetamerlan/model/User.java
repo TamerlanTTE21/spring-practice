@@ -1,7 +1,7 @@
 package com.example.springpracticetamerlan.model;
 
 import java.time.LocalDate;
-import java.util.Map;
+
 import java.util.Objects;
 
 public class User {

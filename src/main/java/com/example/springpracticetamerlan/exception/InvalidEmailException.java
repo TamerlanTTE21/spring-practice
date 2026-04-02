@@ -1,4 +1,4 @@
-package com.example.springpracticetamerlan.Exception;
+package com.example.springpracticetamerlan.exception;
 
 public class InvalidEmailException extends RuntimeException{
     public InvalidEmailException () {

@@ -1,4 +1,4 @@
-package com.example.springpracticetamerlan.Exception;
+package com.example.springpracticetamerlan.exception;
 
 public class UserAlreadyExistException extends  RuntimeException{
     public UserAlreadyExistException () {

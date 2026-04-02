@@ -1,7 +1,7 @@
 package com.example.springpracticetamerlan.controller;
 
-import com.example.springpracticetamerlan.Exception.InvalidEmailException;
-import com.example.springpracticetamerlan.Exception.UserAlreadyExistException;
+import com.example.springpracticetamerlan.exception.InvalidEmailException;
+import com.example.springpracticetamerlan.exception.UserAlreadyExistException;
 import com.example.springpracticetamerlan.model.User;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;

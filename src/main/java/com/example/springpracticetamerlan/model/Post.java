@@ -1,7 +1,14 @@
 package com.example.springpracticetamerlan.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.time.Instant;
 
+@Getter
+@Setter
+@ToString
 public class Post {
     private final String author; // автор
     private final Instant creationDate = Instant.now(); // дата создания
@@ -14,27 +21,4 @@ public class Post {
         this.photoUrl = photoUrl;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
 }

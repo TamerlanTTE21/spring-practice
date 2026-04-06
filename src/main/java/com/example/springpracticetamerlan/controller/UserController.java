@@ -3,6 +3,7 @@ package com.example.springpracticetamerlan.controller;
 import com.example.springpracticetamerlan.exception.InvalidEmailException;
 import com.example.springpracticetamerlan.exception.UserAlreadyExistException;
 import com.example.springpracticetamerlan.model.User;
+import com.example.springpracticetamerlan.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,39 +12,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final UserService userService;
 
-    private final Map<String, User> users = new HashMap<>();
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-    @GetMapping("/users")
+    @GetMapping
     public User[] findAll() {
-
-        log.info("Текущее количество постов: ");
-        return users.values().toArray(new User[0]);
+        return userService.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public User create(@RequestBody User user) {
-
-        if (user.getEmail() == null || user.getEmail().isEmpty()) {
-            throw new InvalidEmailException();
-        }
-
-        for (User u : users.values())
-            if (u.getEmail().equals(user.getEmail())) {
-                throw new UserAlreadyExistException();
-            }
-        users.put(user.getEmail(), user);
-        return user;
+        return userService.create(user);
     }
 
-    @PutMapping("users")
+    @PutMapping
     public User update(@RequestBody User user) {
-        if (user.getEmail() == null || user.getEmail().isEmpty()) {
-            throw new InvalidEmailException();
-        }
-        users.put(user.getEmail(), user);
-        return user;
+        return userService.update(user);
     }
 }

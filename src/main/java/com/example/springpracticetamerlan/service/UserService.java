@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 @Service
 @Slf4j
 public class UserService {
@@ -21,9 +19,11 @@ public class UserService {
     private final Map<String, User> users = new HashMap<>();
 
 
-    public List<User> findAll(String country) {
+    public Collection<User> findAll(String country) {
          List<User> list = new ArrayList<>();
-
+         if (country == null) {
+             return users.values();
+         }
          for(User user: users.values()) {
              if(user.getCountry().equals(country)) {
                  list.add(user);

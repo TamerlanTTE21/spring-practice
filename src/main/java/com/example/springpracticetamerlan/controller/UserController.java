@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,8 +22,13 @@ public class UserController {
     }
 
     @GetMapping
-    public User[] findAll() {
-        return userService.findAll();
+    public List<User> findAll(@RequestParam String country) {
+        return userService.findAll(country);
+    }
+
+    @GetMapping("/{email}")
+    public User getUserByEmail(@PathVariable String email){
+        return userService.getUserByEmail(email);
     }
 
     @PostMapping

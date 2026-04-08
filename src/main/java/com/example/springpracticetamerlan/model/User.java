@@ -8,12 +8,22 @@ public class User {
         private String email;
         private String nickname;
         private LocalDate birthdate;
+        private String country;
 
-        public User(String email, String nickname, LocalDate birthdate) {
+        public User(String email, String nickname, LocalDate birthdate, String country) {
             this.email = email;
             this.nickname = nickname;
             this.birthdate = birthdate;
+            this.country = country;
         }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public String getEmail() {
         return email;

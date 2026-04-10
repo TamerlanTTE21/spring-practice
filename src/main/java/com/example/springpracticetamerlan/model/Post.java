@@ -21,4 +21,5 @@ public class Post {
         this.photoUrl = photoUrl;
     }
 
+
 }

@@ -1,6 +1,7 @@
 package com.example.springpracticetamerlan.controller;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class ProductController {
     List<Product> products = List.of(
@@ -32,36 +34,31 @@ public class ProductController {
 
     @GetMapping("/products")
     public List<Product> getProducts(@RequestParam(required = false) Integer minPrice,
-                                     @RequestParam(required = false) Integer maxPrice
+                                     @RequestParam(required = false) Integer maxPrice,
+                                     @RequestParam(required = false) List<ProductType> type
     ) {
-        if (minPrice == null && maxPrice == null) {
-            return products;
-        } else if (minPrice != null && maxPrice != null) {
-            List<Product> list = new ArrayList<>();
-            for (Product p : products) {
-                if (p.getPrice() >= minPrice && p.getPrice() <= maxPrice) {
-                    list.add(p);
-                }
-            }
-            return list;
-        } else if (minPrice != null) {
-            List<Product> list = new ArrayList<>();
-            for (Product p : products) {
-                if (p.getPrice() >= minPrice) {
-                    list.add(p);
-                }
-            }
-            return list;
-        } else {
-            List<Product> list = new ArrayList<>();
-            for (Product p : products) {
-                if (p.getPrice() <= maxPrice) {
-                    list.add(p);
-                }
-            }
-            return list;
-        }
+        log.info("type=" + type);
+        return products.stream()
+                .filter(product -> minPrice == null || product.getPrice() >= minPrice)
+                .filter(product -> maxPrice == null || product.getPrice() <= maxPrice)
+                .filter(product -> type == null || type.contains(product.getType()))
+                .toList();
+
+//        List<Product> result = new ArrayList<>();
+//        for (Product product : products) {
+//            if (
+//                    (minPrice == null || product.getPrice() >= minPrice)
+//                            && (maxPrice == null || product.getPrice() <= maxPrice)
+//                            && (type == null || product.getType().equals(type))
+//            ) {
+//                result.add(product);
+//            }
+//
+//        }
+//        return result;
+
     }
+
 
     @Data // @RequiredArgsConstructor + @Getter + @Setter + @ToString + @EqualsAndHashcode
     public static class Product {

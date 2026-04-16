@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -20,13 +23,8 @@ public class UserController {
     }
 
     @GetMapping
-    public Collection<User> findAll(@RequestParam(required = false) String country) {
+    public Collection<User> findAll(@RequestParam(required = false) String country){
         return userService.findAll(country);
-    }
-
-    @GetMapping("/{email}")
-    public User getUserByEmail(@PathVariable String email){
-        return userService.getUserByEmail(email);
     }
 
     @PostMapping
